@@ -4,9 +4,3 @@
 
 Per questo progetto useremo unity 2d come game engine, il videogioco sarà un platform 2D.
 Questo progetto viene usato per riabilitazione degli arti superiori.
-
-I rispettivi rouli all'interno del gruppo sono:
-
-Marchisio Raffaele:Sviluppatore, Game Designer
-Bruno Samuele:Sound designer, Level designer
-Galliano Filippo:

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Score_manager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //dichiarazione di variabili
     public static Score_manager instance;
     public Text score;
     public int punteggio;
@@ -17,15 +17,10 @@ public class Score_manager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void Changescore(int value)
     {
-        punteggio += value;
-        score.text = "SCORE:" + punteggio;
+        punteggio += value;      //aggiorno il punteggio
+        score.text = "SCORE:" + punteggio; //aggiorno il testo del punteggio
     }
 
 

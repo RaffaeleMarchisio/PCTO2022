@@ -103,52 +103,52 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (FindObjectOfType<UDP_reciver>().getxPolsoDx() < 500)
+            if (FindObjectOfType<UDP_reciver>().getxPolsoDx() < 500) //se la coordinata x del polso destro è minore di un certo valore
             {
                 
-                anim.SetFloat("speed", 1);
-                rigidbody2d.velocity = new Vector2(+moveSpeed, rigidbody2d.velocity.y);
+                anim.SetFloat("speed", 1); // avvia l'animazione della camminata
+                rigidbody2d.velocity = new Vector2(+moveSpeed, rigidbody2d.velocity.y); //muovo il personaggio di movespeed(verso destra)
                 sr.flipX = false;
             }
             else
             {
-                rigidbody2d.velocity = new Vector2(0, rigidbody2d.velocity.y);
+                rigidbody2d.velocity = new Vector2(0, rigidbody2d.velocity.y); 
             }
             
         }
-        if (FindObjectOfType<UDP_reciver>().getxPolsoDx() > 500 && FindObjectOfType<UDP_reciver>().getxPolsoDx()< 710)
+        if (FindObjectOfType<UDP_reciver>().getxPolsoDx() > 500 && FindObjectOfType<UDP_reciver>().getxPolsoDx()< 710) // mentre il personaggio sta fermo
         {
-            anim.SetFloat("speed", 0);
+            anim.SetFloat("speed", 0); //avvia l'animazione da fermo
         }
     }
 
    
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)  //funzione di unity per la gestione delle collisioni 
     {
-        if (collision.tag == "Coin")
+        if (collision.tag == "Coin")      //quando il personaggio entra nella collisione della moneta
         {
-            Destroy(collision.gameObject);
-            Score_manager.instance.Changescore(100);
-            up_arrow.SetActive(false);
-            sound_coin.Play();
+            Destroy(collision.gameObject);  //distruggi la moneta
+            Score_manager.instance.Changescore(100);  //aggiungi 100 al punteggio
+            up_arrow.SetActive(false); 
+            sound_coin.Play(); //riproduco il suono delle monete
 
         }
-        else if (collision.tag == "Portal")
+        else if (collision.tag == "Portal")  //quando il personaggio entra nella collisione del portale
         {
-            FindObjectOfType<UDP_reciver>().isGameOver = true;
+            FindObjectOfType<UDP_reciver>().isGameOver = true;      //chiusura del socket per la gestione di openpose
             up_arrow.SetActive(false);
-            Final_screen.SetActive(true);
-            final_score.text = "Your Score:" + Score_manager.instance.punteggio;
-            Destroy(rigidbody2d.gameObject);
-            portal_sound.Play();
-            base_audio.Stop();
+            Final_screen.SetActive(true);    //mostra la schermata finale
+            final_score.text = "Your Score:" + Score_manager.instance.punteggio;  //aggiorna il testo del punteggio finale
+            Destroy(rigidbody2d.gameObject); //distrugge l'oggetto del personaggio
+            portal_sound.Play(); //suono del portale
+            base_audio.Stop(); // suono di base si ferma
         }
-        else if (collision.tag == "die")
+        else if (collision.tag == "die")   //quando il personaggio entra nella collisione della collisione dell'oggetto die_line(un oggetto invisibile con un collider)
         {
             if (Score_manager.instance.punteggio != 0 && Score_manager.instance.punteggio>10) {
                 Score_manager.instance.Changescore(-10);
             }
-            rigidbody2d.gameObject.transform.position = cord_player;
+            rigidbody2d.gameObject.transform.position = cord_player;  //quando il personaggio cade viene teletrasportato alle coordinate salvate durante il salto prima della caduta
             up_arrow.SetActive(false);
         }
         else if(collision.tag == "house1")
